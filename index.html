@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Lịch Kỷ Niệm Âm Lịch</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            /* Ẩn thanh cuộn của trang gốc để dùng thanh cuộn của iframe */
+            background-color: #f4f5f7;
+            font-family: Arial, sans-serif;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 100vh;
+            /* Iframe chiếm toàn bộ chiều cao màn hình */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Hiệu ứng xoay tròn lúc chờ Iframe tải dữ liệu từ máy chủ Google */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #f26622;
+            z-index: -1;
+            /* Đẩy ra sau iframe, khi iframe tải xong sẽ đè lên tự che đi */
+        }
+
+        .spinner {
+            border: 4px solid rgba(242, 102, 34, 0.3);
+            border-top: 4px solid #f26622;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Animation Loading -->
+    <div class="loading">
+        <div class="spinner"></div>
+        <b>Đang tải ứng dụng từ Google...</b>
+    </div>
+
+    <!-- Vùng chứa Iframe -->
+    <div class="iframe-container">
+        <iframe
+            src="https://script.google.com/macros/s/AKfycbxK6cy4JhpXZmq3I0uEO-IyY7c5cTAOz59ICy7VUENbWOiZiYpWfnfjtKTMfjJcTt6L/exec"
+            title="Quản Lý Lịch Âm Lịch"></iframe>
+    </div>
+
+</body>
+
+</html>
