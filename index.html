@@ -10,18 +10,14 @@
         html {
             margin: 0;
             padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            /* Ẩn thanh cuộn của trang gốc để dùng thanh cuộn của iframe */
             background-color: #f4f5f7;
             font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
         }
 
         .iframe-container {
             width: 100%;
             height: 100vh;
-            /* Iframe chiếm toàn bộ chiều cao màn hình */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -33,7 +29,6 @@
             border: none;
         }
 
-        /* Hiệu ứng xoay tròn lúc chờ Iframe tải dữ liệu từ máy chủ Google */
         .loading {
             position: absolute;
             top: 50%;
@@ -44,7 +39,6 @@
             align-items: center;
             color: #f26622;
             z-index: -1;
-            /* Đẩy ra sau iframe, khi iframe tải xong sẽ đè lên tự che đi */
         }
 
         .spinner {
@@ -66,22 +60,183 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* Styling cho phần giới thiệu */
+        .info-section {
+            background-color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 3px solid #f26622;
+        }
+
+        .info-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .info-section h2 {
+            color: #1a4175;
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .info-section p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-free {
+            display: inline-block;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* Styling cho form góp ý */
+        .feedback-form {
+            background-color: #f9fafc;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+
+        .feedback-form h3 {
+            color: #f26622;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background-color: #1a4175;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #122d52;
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- Animation Loading -->
     <div class="loading">
         <div class="spinner"></div>
         <b>Đang tải ứng dụng từ Google...</b>
     </div>
 
-    <!-- Vùng chứa Iframe -->
+    <!-- Iframe app vẫn giữ chiều cao 100vh để người dùng thấy trọn vẹn màn hình đầu tiên -->
     <div class="iframe-container">
         <iframe
-            src="https://script.google.com/macros/s/AKfycbxK6cy4JhpXZmq3I0uEO-IyY7c5cTAOz59ICy7VUENbWOiZiYpWfnfjtKTMfjJcTt6L/exec"
+            src="https://script.google.com/macros/s/AKfycbzjxoiSjJZxpVcBx_wsj78Etla1HbSgOxVZSopTGnUQB4me20LmZDUiNThU9JOSlElk/exec"
             title="Quản Lý Lịch Âm Lịch"></iframe>
+    </div>
+
+    <!-- Phần Thông tin giới thiệu và Form góp ý ở dưới cùng -->
+    <div class="info-section">
+        <div class="info-container">
+            <h2>Về Ứng dụng Quản Lý Lịch Kỷ Niệm Âm Lịch</h2>
+            <div class="highlight-free">✨ Phục vụ cộng đồng miễn phí 100% - Không quảng cáo - An toàn dữ liệu</div>
+
+            <p>
+                Đây là một công cụ tiện ích giúp bạn dễ dàng lưu trữ và nhắc nhở các ngày lễ, ngày giỗ, sinh nhật tính
+                theo <strong>Âm lịch</strong>.
+                Ứng dụng tự động quy đổi ngày Âm sang Dương lịch tương ứng của từng năm và đồng bộ trực tiếp vào
+                <strong>Google Calendar</strong> của cá nhân bạn.
+            </p>
+            <p>
+                Dữ liệu hoàn toàn riêng tư và được lưu trữ an toàn trên tài khoản Google của chính bạn. Hệ thống của
+                chúng tôi không sao lưu, không đọc hay lưu giữ bất kỳ thông tin cá nhân nào từ lịch của bạn.
+            </p>
+
+            <div class="auth-guide"
+                style="background: #fff3e0; border-left: 4px solid #f26622; padding: 15px; margin: 25px 0; border-radius: 4px; text-align: left;">
+                <h3 style="margin-top: 0; color: #d95618; font-size: 17px; margin-bottom: 10px;">🔐 Hướng dẫn cấp quyền
+                    (Chỉ yêu cầu lần đầu)</h3>
+                <p style="font-size: 15px; margin-bottom: 12px; line-height: 1.5; color: #444;">
+                    Do ứng dụng này chạy tự động để thêm sự kiện vào <strong>Google Calendar</strong> của bạn, ở lần đầu
+                    sử dụng, Google sẽ bật màn hình yêu cầu cấp phép bảo mật:
+                </p>
+                <ol style="font-size: 15px; margin: 0; padding-left: 25px; line-height: 1.6; color: #444;">
+                    <li>Bấm chọn tài khoản Gmail của bạn.</li>
+                    <li>Khi hiện cảnh báo <em>"Google chưa xác minh ứng dụng này"</em>, hãy bấm <strong>"Nâng
+                            cao"</strong> (Advanced) ở góc dưới bên trái.</li>
+                    <li>Bấm tiếp vào đường link <strong>"Đi tới Quản Lý Lịch Kỷ Niệm (không an toàn)"</strong> ở dưới
+                        cùng.</li>
+                    <li><strong>Quan trọng: Đánh dấu (Tick) vào các ô vuông (checkbox)</strong> để cho phép ứng dụng
+                        truy cập Lịch.</li>
+                    <li>Cuối cùng bấm <strong>"Tiếp tục"</strong> (Continue) để hoàn tất.</li>
+                </ol>
+                <p style="font-size: 13px; color: #777; margin-top: 12px; margin-bottom: 0; font-style: italic;">
+                    * Yên tâm nhé, thao tác này là quy định bảo mật bắt buộc của Google. Ứng dụng chỉ xin quyền tạo Lịch
+                    và hoàn toàn không truy cập dữ liệu cá nhân nào khác của bạn.
+                </p>
+            </div>
+
+            <div class="feedback-form">
+                <h3>Gửi Góp Ý / Liên Hệ Hỗ Trợ</h3>
+                <!-- Form gửi mail trực tiếp bằng mailto, có thể tích hợp API khác nếu bạn muốn -->
+                <form action="mailto:phamhaan@gmail.com" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">Tên của bạn:</label>
+                        <input type="text" id="name" name="Tên" required placeholder="Nhập tên của bạn">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email liên hệ (nếu cần phản hồi):</label>
+                        <input type="email" id="email" name="Email" placeholder="Nhập email của bạn">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Nội dung góp ý / Báo lỗi:</label>
+                        <textarea id="message" name="Nội dung" required
+                            placeholder="Bạn muốn đóng góp tính năng gì, hay gặp lỗi ở đâu?..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Gửi Email Góp Ý</button>
+                </form>
+            </div>
+        </div>
     </div>
 
 </body>
