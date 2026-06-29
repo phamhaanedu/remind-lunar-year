@@ -168,10 +168,21 @@
         <b>Đang tải ứng dụng từ Google...</b>
     </div>
 
+    <!-- Banner cảnh báo đăng nhập (Ẩn mặc định) -->
+    <div class="login-warning" id="login-warning-banner"
+        style="display: none; background-color: #fff3ce; color: #856404; padding: 12px 20px; text-align: center; border-bottom: 2px solid #ffeeba; font-size: 14.5px; position: relative; z-index: 10; line-height: 1.5;">
+        ⚠️ <strong>Mẹo nhỏ:</strong> Nếu ứng dụng bên dưới báo <strong>lỗi 403</strong> (do bạn chưa đăng nhập), hoặc bị
+        chặn hiển thị, hãy bấm <a
+            href="https://script.google.com/macros/s/AKfycbzjxoiSjJZxpVcBx_wsj78Etla1HbSgOxVZSopTGnUQB4me20LmZDUiNThU9JOSlElk/exec"
+            target="_blank"
+            style="color: #0056b3; font-weight: bold; text-decoration: underline; background: #e2d19f; padding: 2px 6px; border-radius: 4px; display: inline-block; margin: 0 4px;">Mở
+            ứng dụng ở Tab mới</a> để tiến hành đăng nhập Google và sử dụng bình thường.
+    </div>
+
     <!-- Iframe app vẫn giữ chiều cao 100vh để người dùng thấy trọn vẹn màn hình đầu tiên -->
     <div class="iframe-container">
         <iframe
-            src="https://script.google.com/macros/s/AKfycbzjxoiSjJZxpVcBx_wsj78Etla1HbSgOxVZSopTGnUQB4me20LmZDUiNThU9JOSlElk/exec"
+            src="https://script.google.com/macros/s/AKfycbzuhuMRbqrvAeFrUo3mnyhhm16VloPuKedkl4PPMAZFli3aoLVNoRP2QYRxZcezxXyK/exec"
             title="Quản Lý Lịch Âm Lịch"></iframe>
     </div>
 
@@ -239,6 +250,31 @@
         </div>
     </div>
 
+    <script>
+        // Lắng nghe tín hiệu từ Iframe
+        let isAppLoaded = false;
+
+        window.addEventListener("message", function (event) {
+            // Xác nhận tín hiệu từ ứng dụng Apps Script (đã tải thành công)
+            if (event.data === "app_loaded") {
+                isAppLoaded = true;
+                // Ẩn cảnh báo và thông báo loading
+                document.querySelector('.loading').style.display = 'none';
+                let warningBanner = document.getElementById('login-warning-banner');
+                if (warningBanner) warningBanner.style.display = 'none';
+            }
+        });
+
+        // Hẹn giờ sau 4.5 giây, nếu không nhận được tín hiệu "app_loaded", 
+        // giả định rằng Iframe bị lỗi 403 do chưa đăng nhập, lúc này mới hiện Banner cảnh báo.
+        setTimeout(function () {
+            if (!isAppLoaded) {
+                document.querySelector('.loading').style.display = 'none';
+                let warningBanner = document.getElementById('login-warning-banner');
+                if (warningBanner) warningBanner.style.display = 'block';
+            }
+        }, 4500);
+    </script>
 </body>
 
 </html>
